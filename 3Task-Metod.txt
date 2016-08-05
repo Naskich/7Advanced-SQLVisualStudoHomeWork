@@ -1,0 +1,52 @@
+Telerik Academiy 
+Entity Framework
+
+Problem3   
+Write a method that finds all 
+customers who have orders made in 1997 and shipped to Canada.
+--------------------------------------------------------------
+In SQL Server 
+------------------------------------------------------------------------------
+USE NORTHWND
+GO
+CREATE PROC usp_CustomerDataCountry
+AS
+SELECT ShipName,CustOmerID,OrderDate,ShipCountry 
+FROM Orders
+WHERE
+ OrderID BETWEEN 10400 AND 10447
+ AND
+ ShipCountry = 'Canada'
+ GO
+
+ EXEC usp_CustomerDataCountry
+--------------------------
+Result
+--------------------------
+Bottom-Dollar Markets	BOTTM	1997-01-10 00:00:00.000	Canada
+Bottom-Dollar Markets	BOTTM	1997-01-10 00:00:00.000	Canada
+Mere Paillarde	MEREP	1997-01-23 00:00:00.000	Canada
+Bottom-Dollar Markets	BOTTM	1997-01-30 00:00:00.000	Canada
+Mere Paillarde	MEREP	1997-02-07 00:00:00.000	Canada
+----------------------------------------------------------------------------------
+METOD IN Visual Studio
+----------------------------------------------------------------------------------
+namespace EntityFramework.ConsoleClient
+{
+    using System;
+    using System.Linq;
+
+    public class CustomersWithSpecificOrders
+    {
+        public static void Main()
+        {
+            foreach (var customer in DataAccessObjectsClass.Customers_With_Orders_In_1997_Shipped_To_Canada_View())
+            {
+                Console.WriteLine(customer.CustomerID);
+            }
+        }
+    }
+}
+
+
+
